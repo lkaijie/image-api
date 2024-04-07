@@ -49,7 +49,32 @@ class ImageApi(_Base):
             # img_dimensions = img_item.find("span", attrs={"class": "nowrap"}).text.split("·")
             img_dimensions = item.find("span", attrs={"class": "nowrap"}).text.split("·")
             img_url = "null"
+            img_width = "null"
+            img_height = "null"
+            img_format = "null"
+            img_title = "null"
             img_dict = {}
+
+            if img_item:
+                img_url = json.loads(img_item["m"])
+            
+            if img_dimensions:
+                img_width, img_height = img_dimensions[0].split("x")
+                img_format = img_dimensions[1].strip()
+                
+            if name_layer:
+                img_title = name_layer["aria-label"]
+                
+            
+            img_dict['url'] = img_url["murl"]
+            img_dict['title'] = img_title
+            img_dict['width'] = img_width
+            img_dict['height'] = img_height
+            img_dict['format'] = img_format
+            imgs.append(ImageItem(img_dict))
+        return imgs
+            
+            
             if img_item:
                 try:
                     img_name = name_layer["aria-label"]
@@ -58,8 +83,6 @@ class ImageApi(_Base):
                     img_height = w_h[1].strip()
                     img_format = img_dimensions[1].strip()
                     img_url = json.loads(img_item["m"])
-                    # with open("liitem.html", "w") as file:
-                    #     file.write(item.prettify())
 
                     img_dict['url'] = img_url["murl"]
                     img_dict['title'] = img_name
