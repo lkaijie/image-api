@@ -26,6 +26,7 @@ class ImageApi(_Base):
         
     # hidden methods here
     def _extract_images(self, soup) -> dict:
+        
         pass
 
     def search(self, query, quality = "" , count = 10, width: int = None, height: int = None) -> list[ImageItem]:
@@ -49,7 +50,6 @@ class ImageApi(_Base):
         soup = self._parse_url(self.image_endpoint + query + quality)
 
         # this is every single item li
-        # imgs = []
         imgs: list[ImageItem] = []
         
         for item in soup.find_all("li", attrs={"data-idx": True}):
@@ -76,11 +76,6 @@ class ImageApi(_Base):
             if name_layer:
                 img_title = name_layer["aria-label"]
                 
-            # img_dict['url'] = img_url["murl"]
-            # img_dict['title'] = img_title
-            # img_dict['width'] = img_width
-            # img_dict['height'] = img_height
-            # img_dict['format'] = "." + img_format
             img_dict = {
                 'url': img_url["murl"],
                 'title': img_title,

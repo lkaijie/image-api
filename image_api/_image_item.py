@@ -22,8 +22,6 @@ def slugify(value, allow_unicode=False):
     return re.sub(r'[-\s]+', '-', value).strip('-_')
 
 class ImageItem:
-
-    
     def __init__(self, dict: dict) -> None:
         # print(dict)
         try:
