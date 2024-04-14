@@ -41,7 +41,6 @@ class ImageItem:
     def download(self, path = "", filename = None):
         if self.url == "null":
             print("No url provided!")
-            # exit()
             return
         if not filename:
             filename = slugify(self.title)
@@ -52,23 +51,14 @@ class ImageItem:
         res = requests.get(self.url, stream=True, headers=headers)
         path = path + filename + self.format
         if res.status_code == 403:
-            # raise HTTPError()
             raise requests.exceptions.HTTPError("Forbidden")
 
-
-        # try:
-        #     res.raise_for_status()
-        # except Exception as e:
-        #     print(res.status_code)
-        #     print("Error downloading:" + str(e))
-        
         with open(path, "wb") as f:
             shutil.copyfileobj(res.raw, f)
         del res
         pass
     
     def __str__(self) -> str:
-        # return f"Title: {self.title}\nUrl: {self.url}\nWidth: {self.width}\nHeight: {self.height}\nFormat: {self.format}"
         return {
             "title": self.title,
             "url": self.url,
