@@ -1,8 +1,6 @@
 import json
 from image_api._base import _Base
 import image_api.config as config
-# from _image_item import ImageItem
-# from image_api._image_item import ImageItem
 from image_api._image_item import ImageItem
 
 # low = 640 x 420
@@ -86,7 +84,21 @@ class ImageApi(_Base):
             
             imgs.append(ImageItem(img_dict))
         return imgs[:count]
+    
+    def to_json(self, data: list[ImageItem]):
+        """ Convert ImageItem to JSON
+        
+        Args:
+            data (list[ImageItem]): List of ImageItem
             
+            Returns:
+                Json: JSON representation of ImageItem"""
+        
+
+        converted = []
+        for img in data:
+            converted.append(img.__dict__)
+        return converted
 
         
 if __name__ == "__main__":

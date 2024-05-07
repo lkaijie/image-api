@@ -8,7 +8,6 @@ class _Base:
     def _parse_url(self, url: str) -> BeautifulSoup:
         # clean url
         url.replace(" ", "%20")
-        # print(url)
         res = requests.get(url, timeout = self.timeout)
         soup = BeautifulSoup(res.text, "html.parser")
         return soup

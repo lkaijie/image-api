@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
     
 setuptools.setup(
     name="image-api",
-    version="0.1.0",
+    version="0.1.1",
     description="A local and lightweight image search API",
     license="MIT",
     long_description=long_description,
